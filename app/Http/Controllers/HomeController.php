@@ -13,7 +13,7 @@ class HomeController extends Controller
         $campeonatosNaoDestaques = Campeonato::where('destaque', false)->where('status', 'ativo')->latest()->paginate(8);
         // dd($campeonatosNaoDestaques);
         $atletas = Atleta::all();
-        $caminhoImagem = asset('imgs/torneio-infantil.jpg');
+        $caminhoImagem = asset('imgs','torneio-infantil.jpg');
         return view('welcome', compact('atletas', 'campeonatosDestaques', 'caminhoImagem', 'campeonatosNaoDestaques'));
     }
     

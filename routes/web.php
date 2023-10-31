@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('atletas.home');
-// Route::get('/', [HomeController::class, 'listarNaoDestaques'])->name('listarNaoDestaques.home');
+Route::get('/campeonatos', [HomeController::class, 'home'])->name('campeonatos.home');
 
-Route::get('/campeonatos/index', [CampeonatoController::class, 'index']);
+
 Route::get('/campeonatos/search', [CampeonatoController::class, 'search']);
+Route::get('/campeonatos/create', [CampeonatoController::class, 'create'])->name('campeonatos.create');
+Route::post('/campeonatos/store', [CampeonatoController::class, 'store'])->name('campeonatos.store');
+Route::get('/campeonatos/index', [CampeonatoController::class, 'index'])->name('campeonatos.index');
 
 Route::get('/atletas/create', [AtletaController::class, 'create'])->name('atletas.create');
 Route::post('/atletas/store', [AtletaController::class, 'store'])->name('atletas.store');

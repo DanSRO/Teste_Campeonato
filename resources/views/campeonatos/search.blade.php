@@ -156,17 +156,19 @@
         </div>
       </div>
     </div>
-    <form action="{{ route('campeonatos.search') }}" method="get"
+    <form action="{{ route('campeonatos.search') }}" method="get" enctype="multipart/form-data"
       class="rounded-lg shadow max-w-7xl m-4 md:mx-auto md:mt-4 outline outline-1 outline-gray-300 p-4 flex flex-col lg:flex-row gap-2"
     >
     @csrf
       <div class="flex-1">
         <label
+        name="titulo"
           for="Título do evento"
           class="block mb-2 text-sm font-medium text-gray-900"
           >Título do evento</label
         >
         <input
+        name="titulo"
           type="text"
           id="Título do evento"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -175,10 +177,49 @@
         />
       </div>
       <div>
+        <label for="imagem" class="block mb-2 text-sm font-medium text-gray-900"
+          >Imagem</label
+        >
+        <input
+          type="file"
+          id="imagem"
+          name="imagem"
+          accept="image/*"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder="Cidade do torneio"
+          required
+        />
+      </div>
+      <div>
+        <label for="estado" class="block mb-2 text-sm font-medium text-gray-900"
+          >Cidade/Estado</label
+        >
+        <select
+          id="cidade_estado"
+          name="cidade_estado"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        >
+          <option selected value="none">Escolha um estado</option>
+          <option value="SP">São Paulo</option>
+          <option value="RJ">Rio de Janeiro</option>
+        </select>
+      </div>
+      <div>
+        <label for="data_realizacao" class="block mb-2 text-sm font-medium text-gray-900"
+          >Data de Realização</label
+        >
+        <input
+        name="data_realizacao"
+          id="data_realizacao"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        >
+      </div>
+      <div>
         <label for="tipo" class="block mb-2 text-sm font-medium text-gray-900"
           >Tipo</label
         >
         <select
+        name="tipo"
           id="tipo"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
@@ -188,29 +229,44 @@
         </select>
       </div>
       <div>
-        <label for="estado" class="block mb-2 text-sm font-medium text-gray-900"
-          >Estado</label
+        <label for="fase" class="block mb-2 text-sm font-medium text-gray-900"
+          >Fase</label
         >
         <select
-          id="estado"
+        name="fase"
+          id="fase"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
-          <option selected value="none">Escolha um estado</option>
-          <option value="SP">São Paulo</option>
-          <option value="RJ">Rio de Janeiro</option>
+          <option selected value="none">Escolha uma fase</option>
+          <option value="fase 1">Fase 1</option>
+          <option value="fase 2">Fase 2</option>
+          <option value="fase 3">Fase 3</option>
         </select>
       </div>
       <div>
-        <label for="cidade" class="block mb-2 text-sm font-medium text-gray-900"
-          >Cidade</label
+        <label for="status" class="block mb-2 text-sm font-medium text-gray-900"
+          >Status</label
+        >
+        <select
+        name="status"
+          id="status"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        >
+          <option selected value="none">Status</option>
+          <option value="kimono">Ativado</option>
+          <option value="no-gi">Desativado</option>
+        </select>
+      </div>
+      <div>
+        <label for="destaque" class="block mb-2 text-sm font-medium text-gray-900"
+          >Destaque</label
         >
         <input
-          type="text"
-          id="cidade"
+        name="destaque"
+          id="destaque"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder="Cidade do torneio"
-          required
-        />
+        >
+        </input>
       </div>
       <div class="flex items-end">
         <button
@@ -245,8 +301,16 @@
         <br>
     </article>
 @endforeach
-     
     </main>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <footer
       class="rounded-lg shadow max-w-7xl m-4 md:mx-auto md:mt-4 outline outline-1 outline-gray-300"
     >

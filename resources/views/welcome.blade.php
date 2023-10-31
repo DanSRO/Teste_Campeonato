@@ -43,7 +43,7 @@
         <nav class="bg-white border-gray-200">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/" class="flex items-center">
-                    <img src="imgs/logo.svg" alt="Logo" />
+                    <img src="{{asset('imgs/logo.svg')}}" alt="Logo" />
                     <p id="logo">OSU BJJ</p>
                 </a>
                 <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-default" aria-expanded="false">
@@ -58,7 +58,7 @@
                             <a href="/" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0" aria-current="page">Início</a>
                         </li>
                         <li>
-                            <a href="./torneios.html" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Torneios</a>
+                            <a href="/campeonatos.index" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Torneios</a>
                         </li>
                         <li>
                             <a href="./area_atleta/area_restrita.html" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center">
@@ -72,7 +72,7 @@
     </header>
     <main>
         <section aria-labelledby="banner_title" class="h-[600px] relative">
-            <img src="imgs/banner.jpg" alt="Crianças lutando jiu jitsu brasileiro" class="w-full h-full object-cover" />
+            <img src="{{asset('imgs/banner.jpg')}}" alt="Crianças lutando jiu jitsu brasileiro" class="w-full h-full object-cover" />
             <div class="grid bg-black/70 absolute inset-0 place-items-center">
                 <h1 class="text-5xl leading-snug text-white text-center font-normal uppercase" id="banner_title">
                     O maior site de torneios
@@ -163,7 +163,7 @@
                 <a href="{{ route('atletas.home') }}">
                     <h1>Lista de Atletas Em Destaque</h1>
                 </a>
-                <img src="{{$caminhoImagem}}" alt="campeonato-infantil">
+                <img src="{{asset('imgs/torneio-infantil.jpg')}}" alt="campeonato-infantil">
                 <p>Código do Atleta: {{ $atleta->codigo }}</p>
                 <p>Nome: {{ $atleta->nome }}</p>                
                 <p>Data de Nascimento: {{ $atleta->data_nascimento}}</p>

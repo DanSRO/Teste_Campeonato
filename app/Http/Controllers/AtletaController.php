@@ -74,4 +74,8 @@ class AtletaController extends Controller
         return view('certificados', compact('certificados'));
     }
 
+    public function area_restrita(){
+        return view('/area_atleta.area_restrita');
+    }
+
 }

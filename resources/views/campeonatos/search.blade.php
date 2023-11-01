@@ -175,21 +175,7 @@
           placeholder="Nome do evento"
           required
         />
-      </div>
-      <div>
-        <label for="imagem" class="block mb-2 text-sm font-medium text-gray-900"
-          >Imagem</label
-        >
-        <input
-          type="file"
-          id="imagem"
-          name="imagem"
-          accept="image/*"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder="Cidade do torneio"
-          required
-        />
-      </div>
+      </div>      
       <div>
         <label for="estado" class="block mb-2 text-sm font-medium text-gray-900"
           >Cidade/Estado</label
@@ -203,17 +189,7 @@
           <option value="SP">São Paulo</option>
           <option value="RJ">Rio de Janeiro</option>
         </select>
-      </div>
-      <div>
-        <label for="data_realizacao" class="block mb-2 text-sm font-medium text-gray-900"
-          >Data de Realização</label
-        >
-        <input
-        name="data_realizacao"
-          id="data_realizacao"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        >
-      </div>
+      </div>      
       <div>
         <label for="tipo" class="block mb-2 text-sm font-medium text-gray-900"
           >Tipo</label
@@ -227,47 +203,7 @@
           <option value="kimono">Kimono</option>
           <option value="no-gi">No Gi</option>
         </select>
-      </div>
-      <div>
-        <label for="fase" class="block mb-2 text-sm font-medium text-gray-900"
-          >Fase</label
-        >
-        <select
-        name="fase"
-          id="fase"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        >
-          <option selected value="none">Escolha uma fase</option>
-          <option value="fase 1">Fase 1</option>
-          <option value="fase 2">Fase 2</option>
-          <option value="fase 3">Fase 3</option>
-        </select>
-      </div>
-      <div>
-        <label for="status" class="block mb-2 text-sm font-medium text-gray-900"
-          >Status</label
-        >
-        <select
-        name="status"
-          id="status"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        >
-          <option selected value="none">Status</option>
-          <option value="kimono">Ativado</option>
-          <option value="no-gi">Desativado</option>
-        </select>
-      </div>
-      <div>
-        <label for="destaque" class="block mb-2 text-sm font-medium text-gray-900"
-          >Destaque</label
-        >
-        <input
-        name="destaque"
-          id="destaque"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        >
-        </input>
-      </div>
+      </div>      
       <div class="flex items-end">
         <button
           type="submit"

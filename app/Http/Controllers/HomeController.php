@@ -15,6 +15,5 @@ class HomeController extends Controller
         $atletas = Atleta::all();
         $caminhoImagem = asset('imgs','torneio-infantil.jpg');
         return view('welcome', compact('atletas', 'campeonatosDestaques', 'caminhoImagem', 'campeonatosNaoDestaques'));
-    }
-    
+    }    
 }

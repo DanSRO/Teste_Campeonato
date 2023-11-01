@@ -61,9 +61,15 @@
                             <a href="/campeonatos.index" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Torneios</a>
                         </li>
                         <li>
-                            <a href="./area_atleta/area_restrita.html" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center">
-                                Área do competidor
-                            </a>
+                            @auth
+                                <a href="{{ route('area_atleta.area_restrita') }}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center">
+                                    Área restrita
+                                </a>
+                            @else
+                                <a href="{{ route('login') }}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center">
+                                    Área do competidor
+                                </a>
+                            @endauth
                         </li>
                     </ul>
                 </div>
@@ -119,9 +125,9 @@
 
                 @foreach($campeonatos as $campeonato)
                     <!-- Exibir detalhes do campeonato com paginação -->
-                @endforeach
-                {{ $campeonatos->links() }}
-                                    --}}
+                @endforeach --}}
+                
+                                    
                 
             </div>
             <div class="p-3 relative">
@@ -183,23 +189,23 @@
 
                 @foreach($campeonatosNaoDestaques as $campeonatoSem)
                 <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
-                <a href="{{ route('atletas.home') }}">
-                    <h1>Lista de Campeonato SEM Destaque</h1>
-                
-                <p>Código do Campeonato: {{ $campeonatoSem->codigo }}</p>
-                <p>Título: {{ $campeonatoSem->titulo }}</p>
-                <p>Imagem: {{ $campeonatoSem->imagem }}</p>
-                <p>Cidade e Estado: {{ $campeonatoSem->cidade_estado }}</p>
-                <p>Data de Realização: {{ $campeonatoSem->data_realizacao}}</p>
-                <p>Sobre o Evento: {{ $campeonatoSem->sobre_evento}}</p>
-                <p>Ginásio: {{ $campeocampeonatoSemnato->ginasio}}</p>
-                <p>Informações Gerais: {{ $campeonatoSem->informacoes_gerais}}</p>
-                <p>Entrada Público: {{$campeonatoSem->entrada_publico}}</p>
-                <p>Tipo: {{$campeonatoSem->tipo}}</p>
-                <p>Fase: {{$campeonatoSem->fase}}</p>
-                <p>Status: {{$campeonatoSem->status}}</p>
-                <br>
-            </article>
+                    <a href="{{ route('atletas.home') }}">
+                        <h1>Lista de Campeonato SEM Destaque</h1>
+                    
+                    <p>Código do Campeonato: {{ $campeonatoSem->codigo }}</p>
+                    <p>Título: {{ $campeonatoSem->titulo }}</p>
+                    <p>Imagem: {{ $campeonatoSem->imagem }}</p>
+                    <p>Cidade e Estado: {{ $campeonatoSem->cidade_estado }}</p>
+                    <p>Data de Realização: {{ $campeonatoSem->data_realizacao}}</p>
+                    <p>Sobre o Evento: {{ $campeonatoSem->sobre_evento}}</p>
+                    <p>Ginásio: {{ $campeocampeonatoSemnato->ginasio}}</p>
+                    <p>Informações Gerais: {{ $campeonatoSem->informacoes_gerais}}</p>
+                    <p>Entrada Público: {{$campeonatoSem->entrada_publico}}</p>
+                    <p>Tipo: {{$campeonatoSem->tipo}}</p>
+                    <p>Fase: {{$campeonatoSem->fase}}</p>
+                    <p>Status: {{$campeonatoSem->status}}</p>
+                    <br>
+                </article>
             </a>
                 @endforeach
                 {{--
@@ -237,7 +243,7 @@
                         </p>
                     </div>
         </section>
-                    <a href="./integra.html" title="Saiba mais sobre Campeonato regional santista 2023" class="absolute inset-0"></a>
+                    
                 </article>
                 <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
                     <img src="imgs/torneio-infantil.jpg" alt="Imagem do torneio" class="rounded-md w-full h-[200px] object-cover" />
@@ -267,7 +273,7 @@
                             São Paulo-SP
                         </p>
                     </div>
-                    <a href="./integra.html" title="Saiba mais sobre Campeonato regional santista 2023" class="absolute inset-0"></a>
+                    
                 </article>
                 <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
                     <img src="imgs/maia.webp" alt="Imagem do torneio" class="rounded-md w-full h-[200px] object-cover" />
@@ -297,7 +303,7 @@
                             Rio de Janeiro-RJ
                         </p>
                     </div>
-                    <a href="./integra.html" title="Saiba mais sobre Campeonato regional santista 2023" class="absolute inset-0"></a>
+                    
                 </article>
                 <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
                     <img src="imgs/torneio-card.jpg" alt="Imagem do torneio" class="rounded-md w-full h-[200px] object-cover" />
@@ -327,7 +333,7 @@
                             Santos-SP
                         </p>
                     </div>
-                    <a href="./integra.html" title="Saiba mais sobre Campeonato regional santista 2023" class="absolute inset-0"></a>
+                    
                 </article>
             </div>
             <p class="mt-4 max-w-7xl mx-auto flex justify-center md:justify-end">
@@ -348,10 +354,10 @@
             </span>
             <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 sm:mt-0">
                 <li>
-                    <a href="./index.html" class="mr-4 hover:underline md:mr-6">Início</a>
+                    <a href="campeonatos/index" class="mr-4 hover:underline md:mr-6">Início</a>
                 </li>
                 <li>
-                    <a href="./torneios.html" class="mr-4 hover:underline md:mr-6">Torneios</a>
+                    <a href="campeonatos/search" class="mr-4 hover:underline md:mr-6">Torneios</a>
                 </li>
                 <li>
                     <a href="#" class="mr-4 hover:underline md:mr-6">Área do competidor</a>

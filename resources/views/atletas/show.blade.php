@@ -1,20 +1,23 @@
-@extends('layouts.app')
 
-@section('content')
-    <h1>Lista de Atletas</h1>
+<h1>Detalhes do Atleta</h1>
 
-    @foreach($atletas as $atleta)
-       
-            {{ $atleta->nome }}
-            {{ $atleta->cpf }}
-            {{ $atleta->sexo }}
-            {{ $atleta->email }}
-            {{ $atleta->senha }}
-            {{ $atleta->data_nascimento}}
-            {{ $atleta->faixa}}
-            {{ $atleta->peso}}
-            {{ $atleta->data_inscricao}}
-        
-        <br>
-    @endforeach
-@endsection
+    
+        {{ $atleta->nome }}
+        {{ $atleta->cpf }}
+        {{ $atleta->sexo }}
+        {{ $atleta->email }}
+        {{ $atleta->senha }}
+        {{ $atleta->data_nascimento}}
+        {{ $atleta->faixa}}
+        {{ $atleta->peso}}
+        {{ $atleta->data_inscricao}}        
+    
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

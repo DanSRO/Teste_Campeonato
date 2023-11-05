@@ -14,7 +14,7 @@ class UserController extends Controller
     }
     
     public function create(){
-        return view('/painel.painel');
+        return view('/painel.cadastrar');
     }
 
     public function store(Request $request){

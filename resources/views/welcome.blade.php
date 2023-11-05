@@ -58,7 +58,7 @@
                             <a href="/" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0" aria-current="page">Início</a>
                         </li>
                         <li>
-                            <a href="/campeonatos.index" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Torneios</a>
+                            <a href="/campeonatos/index" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Torneios</a>
                         </li>
                         <li>
                             @auth
@@ -66,7 +66,7 @@
                                     Área restrita
                                 </a>
                             @else
-                                <a href="{{ route('login') }}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center">
+                                <a href="{{ route('logar') }}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center">
                                     Área do competidor
                                 </a>
                             @endauth
@@ -96,11 +96,10 @@
             @isset($campeonatosDestaques)
             @foreach($campeonatosDestaques as $campeonato)
             <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
-                <a href="{{ route('campeonatos.detalhes', ['id' => $campeonato->id]) }}">
-                    <h1>Lista de Campeonato Em Destaque</h1>                
-                <p>Código do Campeonato: {{ $campeonato->codigo }}</p>
-                <p>Título: {{ $campeonato->titulo }}</p>
-                <p>Imagem: {{ $campeonato->imagem }}</p>
+                <a href="{{ route('detalhes.campeonatos', ['id' => $campeonato->id]) }}">
+                <h3>{{ $campeonato->titulo }}</h3>               
+                <p>Código do Campeonato: {{ $campeonato->codigo }}</p>                
+                <p>Imagem: <img src="{{ asset('imgs/' . $campeonato->imagem)}}" alt="Imagem do Campeonato"></p>
                 <p>Cidade e Estado: {{ $campeonato->cidade_estado }}</p>
                 <p>Data de Realização: {{ $campeonato->data_realizacao}}</p>
                 <p>Sobre o Evento: {{ $campeonato->sobre_evento}}</p>
@@ -166,10 +165,10 @@
                 @isset($atletas)
                 @forelse($atletas as $atleta)
             <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
-                <a href="{{ route('atletas.home') }}">
+                {{--<a href="{{ route('detalhes.campeonatos', $campeonatos->id) }}">
                     <h1>Lista de Atletas Em Destaque</h1>
-                </a>
-                <img src="{{asset('imgs/torneio-infantil.jpg')}}" alt="campeonato-infantil">
+                </a>--}}
+                <p>Imagem: <img src="{{ asset('imgs/' . $campeonato->imagem)}}" alt="Imagem do Campeonato"></p>
                 <p>Código do Atleta: {{ $atleta->codigo }}</p>
                 <p>Nome: {{ $atleta->nome }}</p>                
                 <p>Data de Nascimento: {{ $atleta->data_nascimento}}</p>
@@ -190,11 +189,10 @@
                 @foreach($campeonatosNaoDestaques as $campeonatoSem)
                 <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
                     <a href="{{ route('atletas.home') }}">
-                        <h1>Lista de Campeonato SEM Destaque</h1>
-                    
+                        <!-- <h1>Lista de Campeonato SEM Destaque</h1> -->
+                    <h3>Título: {{ $campeonatoSem->titulo }}</h3>
                     <p>Código do Campeonato: {{ $campeonatoSem->codigo }}</p>
-                    <p>Título: {{ $campeonatoSem->titulo }}</p>
-                    <p>Imagem: {{ $campeonatoSem->imagem }}</p>
+                    <p>Imagem: <img src="{{ asset('imgs/' . $campeonatoSem->imagem)}}" alt="Imagem do Campeonato"></p>
                     <p>Cidade e Estado: {{ $campeonatoSem->cidade_estado }}</p>
                     <p>Data de Realização: {{ $campeonatoSem->data_realizacao}}</p>
                     <p>Sobre o Evento: {{ $campeonatoSem->sobre_evento}}</p>
@@ -206,14 +204,9 @@
                     <p>Status: {{$campeonatoSem->status}}</p>
                     <br>
                 </article>
-            </a>
+                </a>
                 @endforeach
-                {{--
-                @foreach($campeonatos as $campeonato)
-                    <!-- Exibir detalhes do campeonato com paginação -->
-                @endforeach
-                {{ $campeonatos->links() }}
-                                    --}}
+                {{ $campeonatosNaoDestaques->links() }}              
                 
             </div>
             <div class="p-3 relative">

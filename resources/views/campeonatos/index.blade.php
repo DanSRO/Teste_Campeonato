@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campeonatos</title>
-</head>
-<body>
+@extends('layout.layout')
+@section('title', 'Campeonatos Index')
+@section('content')
     <h1>Lista de Campeonatos</h1>
 
     @foreach($campeonatos as $campeonato)
         <a href="{{ route('campeonatos.index', $campeonato->id) }}">
         <p>Código do Campeonato: {{ $campeonato->codigo }}</p>
         <p>Título: {{ $campeonato->titulo }}</p>
-        <img src="{{asset($caminhoImagem)}}" alt="campeonato-infantil">
+        <P><img src="{{asset('imgs/'.$campeonato->imagem)}}" alt="campeonato-imagem"></P>
         <p>Cidade e Estado: {{ $campeonato->cidade_estado }}</p>
         <p>Data de Realização: {{ $campeonato->data_realizacao}}</p>
         <p>Sobre o Evento: {{ $campeonato->sobre_evento}}</p>
@@ -26,5 +21,4 @@
         </a>
         <br>
     @endforeach
-</body>
-</html>
+@endsection

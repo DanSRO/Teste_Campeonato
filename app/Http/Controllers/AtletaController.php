@@ -10,11 +10,13 @@ class AtletaController extends Controller
 {
     public function index(){
         $atletas = Atleta::all();
-        return view('atletas.index', compact('atletas'));
+        return view('atletas/index', compact('atletas'));
     }
-
+    
     public function create(){
-        return view('atletas.create');
+        $campeonatos = Campeonato::all();
+        $atletas = Atleta::all();
+        return view('atletas.create', compact('campeonatos', 'atletas'));
     }
 
     public function store(Request $request){
@@ -38,8 +40,7 @@ class AtletaController extends Controller
         $existingAtleta = Atleta::where('codigo', $request->codigo)->first();
         if ($existingAtleta) {
             return redirect()->back()->withErrors(['codigo' => 'Este código já está em uso.'])->withInput();
-        }
-
+        }                   
         $atleta = new Atleta();
         $atleta->codigo = uniqid();
         $atleta->nome = $request->nome;
@@ -60,7 +61,7 @@ class AtletaController extends Controller
 
     public function show($id){
         $atleta = Atleta::findOrFail($id);
-        return view('show', compact('atleta'));
+        return view('atletas.show', compact('atleta'));
     }
     
     public function certificados($id){

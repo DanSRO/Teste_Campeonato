@@ -1,107 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Patua+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        font-family: "Roboto", sans-serif;
-      }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      [data-calendar] {
-        font-family: "Patua One", serif;
-      }
-      #logo {
-        text-transform: uppercase;
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-left: 5px;
-      }
-      .debug {
-        outline: 1px solid red;
-      }
-    </style>
-    <title>Campeonato de Jiu Jitsu</title>
-  </head>
-  <body>
-    <header>
-      <nav class="bg-white border-gray-200">
-        <div
-          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-        >
-          <a href="/" class="flex items-center">
-            <img src="imgs/logo.svg" alt="Logo" />
-            <p id="logo">OSU BJJ</p>
-          </a>
-          <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Abrir menu principal</span>
-            <svg
-              class="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
-          <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul
-              class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:items-center md:space-x-8 md:mt-0 md:border-0 md:bg-white"
-            >
-              <li>
-                <a
-                  href="/"
-                  class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                  >Início</a
-                >
-              </li>
-              <li>
-                <a
-                  href="./torneios.html"
-                  class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
-                  aria-current="page"
-                  >Torneios</a
-                >
-              </li>
-              <li>
-                <a
-                  href="./area_atleta/area_restrita.html"
-                  class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center"
-                >
-                  Área do competidor
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+@extends('layout.layout')
+@section('title', 'Busca de Campeonato')
+@section('content')
     <div class="bg-blue-700">
       <div
         class="relative grid place-items-center max-w-7xl w-full mx-2 lg:mx-auto min-h-[200px]"
@@ -156,7 +55,7 @@
         </div>
       </div>
     </div>
-    <form action="{{ route('campeonatos.search') }}" method="get" enctype="multipart/form-data"
+    <form action="{{ route('busca.campeonatos') }}" method="get" enctype="multipart/form-data"
       class="rounded-lg shadow max-w-7xl m-4 md:mx-auto md:mt-4 outline outline-1 outline-gray-300 p-4 flex flex-col lg:flex-row gap-2"
     >
     @csrf
@@ -186,8 +85,7 @@
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
           <option selected value="none">Escolha um estado</option>
-          <option value="SP">São Paulo</option>
-          <option value="RJ">Rio de Janeiro</option>
+          <option value="Fortaleza, Ceará">Fortaleza, Ceará</option>
         </select>
       </div>      
       <div>
@@ -213,31 +111,28 @@
         </button>
       </div>
     </form>
-    <main>
-      <div class="grid lg:grid-cols-4 gap-3 max-w-7xl mx-2 lg:mx-auto">
-        <article
-          class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300"
-        >
+    <main>    
+    <div class="grid lg:grid-cols-4 gap-3 max-w-7xl mx-2 lg:mx-auto">
         @foreach($resultados as $campeonato)
-    <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
-        <a href="{{route('campeonatos.search')}}"></a>
-        <h1>Lista de Campeonato Em Destaque</h1>
-        <p>Código do Campeonato: {{ $campeonato->codigo }}</p>
-        <p>Título: {{ $campeonato->titulo }}</p>
-        <img src="{{asset($caminhoImagem)}}" alt="campeonato-infantil">
-        <p>Cidade e Estado: {{ $campeonato->cidade_estado }}</p>
-        <p>Data de Realização: {{ $campeonato->data_realizacao}}</p>
-        <p>Sobre o Evento: {{ $campeonato->sobre_evento}}</p>
-        <p>Ginásio: {{ $campeonato->ginasio}}</p>
-        <p>Informações Gerais: {{ $campeonato->informacoes_gerais}}</p>
-        <p>Entrada Público: {{$campeonato->entrada_publico}}</p>
-        <p>Tipo: {{$campeonato->tipo}}</p>
-        <p>Fase: {{$campeonato->fase}}</p>
-        <p>Status: {{$campeonato->status}}</p>
-        <br>
-    </article>
-@endforeach
-    </main>
+            <article class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300">
+                <a href="{{ route('detalhes.campeonatos', $campeonato->id) }}">
+                    <h2>Código do Campeonato: {{ $campeonato->codigo }}</h2>
+                    <h3>Título: {{ $campeonato->titulo }}</h3>
+                    <p><img src="{{ asset('imgs/' . $campeonato->imagem) }}" alt="Imagem do campeonato"></p>
+                    <p>Cidade e Estado: {{ $campeonato->cidade_estado }}</p>
+                    <p>Data de Realização: {{ \Carbon\Carbon::parse($campeonato->data_realizacao)->translatedFormat('l, j \d\e F') }}</p>
+                    <p>Sobre o Evento: {{ $campeonato->sobre_evento }}</p>
+                    <p>Ginásio: {{ $campeonato->ginasio }}</p>
+                    <p>Informações Gerais: {{ $campeonato->informacoes_gerais }}</p>
+                    <p>Entrada Público: {!! $campeonato->entrada_publico !!}</p>
+                    <p>Tipo: {{ $campeonato->tipo }}</p>
+                    <p>Fase: {{ $campeonato->fase }}</p>
+                    <p>Status: {{ $campeonato->status }}</p>
+                </a>
+            </article>
+        @endforeach
+    </div>
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -247,41 +142,5 @@
             </ul>
         </div>
     @endif
-    <footer
-      class="rounded-lg shadow max-w-7xl m-4 md:mx-auto md:mt-4 outline outline-1 outline-gray-300"
-    >
-      <div
-        class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between"
-      >
-        <span class="text-sm text-gray-500 sm:text-center"
-          >© 2023 <a href="/" class="hover:underline">OSU BJJ</a>. Todos os
-          direitos reservados.
-        </span>
-        <ul
-          class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 sm:mt-0"
-        >
-          <li>
-            <a href="./index.html" class="mr-4 hover:underline md:mr-6"
-              >Início</a
-            >
-          </li>
-          <li>
-            <a href="./torneios.html" class="mr-4 hover:underline md:mr-6"
-              >Torneios</a
-            >
-          </li>
-          <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6"
-              >Área do competidor</a
-            >
-          </li>
-          <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6"
-              >Política de privacidade</a
-            >
-          </li>
-        </ul>
-      </div>
-    </footer>
-  </body>
-</html>
+</main>
+@endsection    

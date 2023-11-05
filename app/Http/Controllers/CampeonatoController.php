@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Atleta;
 use App\Models\Campeonato;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CampeonatoController extends Controller
 {
     public function index(){
-        $campeonatos = Campeonato::all();
-        $caminhoImagem = asset('imgs/torneio-infantil.jpg'); 
-        return view('campeonatos.index', compact('campeonatos', 'caminhoImagem'));
+        $campeonatos = Campeonato::all();        
+        return view('/campeonatos/index', compact('campeonatos'));
     }
 
     public function create(){
@@ -22,7 +22,7 @@ class CampeonatoController extends Controller
         
         $request->validate([
             'titulo' => 'required|string|max:255',
-            'imagem',
+            'imagem'=> 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'cidade_estado' => 'required|string|max:255',
             'data_realizacao' => 'required',
             'sobre_evento' => 'required|max:255',
@@ -42,9 +42,18 @@ class CampeonatoController extends Controller
         $campeonato = new Campeonato();
         $campeonato->codigo = uniqid();
         $campeonato->titulo = $request->titulo;
-        $campeonato->imagem = $request->imagem->store('imgs', 'public');
+        if ($request->hasFile('imagem')) {
+            $imagem = $request->file('imagem');
+            $nomeImagem = time() . '.' . $imagem->getClientOriginalExtension();
+            $caminhoImagem = 'imgs/' . $nomeImagem;
+            $imagem->move(public_path('imgs'), $nomeImagem);
+    
+            // Salva o nome da imagem no modelo
+        $campeonato->imagem = $nomeImagem;
+        }
         $campeonato->cidade_estado = $request->cidade_estado;
-        $campeonato->data_realizacao = $request->data_realizacao;
+        $dataFormatada = Carbon::createdFromFormat('D-m-Y', $request->data_realizacao)->format('D-m-Y');
+        $campeonato->data_realizacao = $dataFormatada;
         $campeonato->sobre_evento = $request->sobre_evento;
         $campeonato->ginasio = $request->ginasio;
         $campeonato->informacoes_gerais = $request->informacoes_gerais;
@@ -63,29 +72,35 @@ class CampeonatoController extends Controller
     }
 
     public function detalhes($id){
-        $campeonato = Campeonato::findOrFail($id);
-        $caminhoImagem = asset('imgs/torneio-infantil.jpg');
-        return view('campeonatos.detalhes', compact('campeonato', 'caminhoImagem'));
+        $campeonatos = Campeonato::find($id);
+        $caminhoImagem = asset('imgs/'.$campeonatos->imagem);
+        if(!$campeonatos){
+            abort(404);
+        }
+        return view('campeonatos.detalhes', compact('campeonatos', 'caminhoImagem'));
     }
 
     public function search(Request $request)
     {
-        $caminhoImagem = asset('imgs/torneio-infantil.jpg');
+        // Não é necessário usar Campeonato::find() aqui
+
         $titulo = $request->input('titulo');
         $tipo = $request->input('tipo');
         $estado = $request->input('cidade_estado');
-        // $cidade = $request->input('cidade');
 
         $resultados = Campeonato::where('titulo', 'like', "%$titulo%")
             ->where('tipo', $tipo)
             ->where('cidade_estado', $estado)
             ->get();
-        // dd($resultados);
-        return view('campeonatos.search', compact('resultados', 'caminhoImagem'));
+            
+        $caminhoImagem = $resultados->isNotEmpty() ? asset('imgs/'.$resultados->first()->imagem) : null;
+
+        return view('campeonatos/search', compact('resultados', 'caminhoImagem'));
     }
 
+
     public function show($id){
-        $atletas = Campeonato::findOrFail($id);
-        return view('show', compact('atletas'));
+        $campeonatos = Campeonato::findOrFail($id);
+        return view('campeonatos/detalhes', compact('campeonatos'));
     }
 }

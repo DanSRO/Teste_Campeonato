@@ -19,22 +19,23 @@ class AuthController extends Controller
         // if ($user && Hash::check($credentials['password'], $user->password)) {
         //     Auth::login($user);
         
-        $credencials = $request->only('email', 'password');
-        // dd($credencials);
-        // dd(Auth::attempt($credencials));
-        if(Auth::attempt($credencials)){
+        $credentials = $request->only('email', 'password');
+        // \Log::info('Tentativa de login', ['credenciais' => $credentials]);
+        // dd($credentials);
+        // dd(Auth::attempt($credentials));
+        if(Auth::attempt($credentials)){
             $request->session()->regenerate();
             // dd('teste');
             // return redirect('/area_atleta/area_restrita');
             return redirect()->intended('/area_atleta/area_restrita');
         }
 
-    return back()->withErrors(['email' => 'Credenciais inválidas.']);
+    return back()->withErrors(['login_error' => 'Credenciais inválidas.']);
 
-    // $credencials = $request->only('email', 'password');
+    // $credentials = $request->only('email', 'password');
     // $user = User::where('email', $credencials['email'])->first();
 
-    // if ($user && Hash::check($credencials['password'], $user->password)) {
+    // if ($user && Hash::check($credentials['password'], $user->password)) {
     //     Auth::login($user);
     //     return redirect()->intended('/area_atleta.area_restrita');
     // }

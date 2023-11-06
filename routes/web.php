@@ -18,7 +18,7 @@ Route::get('/area_atleta/login', [AuthController::class, 'showLoginForm'])->name
 Route::post('/area_atleta/login', [AuthController::class, 'login'])->name('logar');
 Route::post('/area_atleta/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/area_atleta/area_restrita', [AtletaController::class, 'area_restrita'])->name('area_atleta.area_restrita');//->middleware('auth');
+Route::get('/area_atleta/area_restrita', [AtletaController::class, 'area_restrita'])->name('area_atleta.area_restrita')->middleware('auth');
 
 Route::get('/campeonatos/search', [CampeonatoController::class, 'search'])->name('busca.campeonatos');
 Route::get('/campeonatos/create', [CampeonatoController::class, 'create'])->name('campeonatos.create');

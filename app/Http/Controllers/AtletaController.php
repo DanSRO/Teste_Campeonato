@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Atleta;
 use App\Models\Campeonato;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AtletaController extends Controller
 {
@@ -76,6 +77,13 @@ class AtletaController extends Controller
     }
 
     public function area_restrita(){
+        if (Auth::check()) {
+            
+            return view('area_atleta.area_restrita');
+        } else {
+            // Redirecione para a página de login se não estiver autenticado
+            return redirect()->route('logar');
+        }
         return view('/area_atleta.area_restrita');
     }
 

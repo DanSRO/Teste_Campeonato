@@ -72,10 +72,10 @@
           </div>
         </div>
       </div>
-      @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+      @if($errors->has('login_error'))
+      <div class="alert alert-danger">
+          {{ $errors->first('login_error') }}
+      </div>
+      @endif
     </main>
 @endsection
